@@ -19,6 +19,9 @@
 
 </script>
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script type="text/javascript">
 // redefining default features
 var _POPUP_FEATURES = 'width=500,height=300,resizable=1,scrollbars=1,titlebar=1,status=1';
@@ -54,10 +57,9 @@ BODY {
   <sup>1</sup> MIT CSAIL&nbsp;&nbsp;&nbsp;
   <sup>2</sup> OpenAI
 </h2></center>
-<!-- <center><h2>In ICML 2020</h2></center> -->
 <center><h2><strong><a href="">Paper</a> | <a href="">PyTorch code</a></strong> </h2></center>
-<center><a href="https://shuangli59.github.io/energy-base-model/compositional-energy-based-model/fig/comp_cartoon.pdf">
-<img src="https://shuangli59.github.io/energy-base-model/compositional-energy-based-model/fig/comp_cartoon.pdf" width="1000"> </a></center>
+<center><a href="fig/comp_cartoon.pdf">
+<img src="fig/comp_cartoon.pdf" width="1000"> </a></center>
 <p></p>
 
 
@@ -68,8 +70,84 @@ BODY {
   A vital aspect of human intelligence is the ability to compose increasingly complex concepts out of simpler ideas, enabling both rapid learning and adaptation of knowledge. In this paper we show that energy-based models can exhibit this ability by directly combining probability distributions. Samples from the combined distribution correspond to compositions of concepts. For example, given a distribution for smiling faces, and another for male faces, we can combine them to generate smiling male faces. This allows us to generate natural images that simultaneously satisfy conjunctions, disjunctions, and negations of concepts. We evaluate compositional generation abilities of our model on the CelebA dataset of natural faces and synthetic 3D scene images. We also demonstrate other unique advantages of our model, such as the ability to continually learn and incorporate new concepts, or infer compositions of concept properties underlying an image.
 </p></div>
 
+<!-- <a href=""><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="fig/paper_thumbnail.jpg" width=170></a> -->
+<br>
+
+<h2>Method</h2>
+
+Energy based models (EBMs) represent a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data is proportional to   \( \propto e^{-E_\theta(x)}\).
+
+
+We can generate data from an EBM by implicit sampling through Langevin dynamics, where samples are sequentially refined, following the procedure
+\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} E_\theta (\tilde{\mathbb{x}}^{k-1}) + \omega^k, \; \omega^k \sim \mathcal{N}(0,\lambda), \]
+
+
+By defining generation through such a manner, we can compose generation across different EBMs learned on attributes of position, size, color, gender, hair style, and age, through the symbolic operators of conjunction, disjunction, and negation. 
+
+<img src="fig/comp_cartoon.pdf" width="1000"> </a></center>
+
+In particular, we consider a set of independently trained EBMs, \(E(\tilde{x}|c_1), E(\tilde{x}|c_2), \ldots,  E(\tilde{x}|c_n)\), which are learned conditional distributions on underlying latent codes $c_i$. Latent codes we consider include position, size, color, gender, hair style, and age, which we also refer to as concepts.
+
+<h3>Conjunction</h3>
+
+In concept conjunction, given separate independent concepts (such as a particular gender, hair style, or facial expression), we wish to construct an generation with the specified gender, hair style, and facial expression -- the combination of each concept. The likelihood of such an generation given a set of specific concepts is equal to the product of the likelihood of each individual concept
+
+\[ p(x|c_1 \; \text{and} \; c_2, \ldots, \; \text{and} \; c_i) = \prod_i p(x|c_i) \propto e^{-\sum_i E(x|c_i)}. \]
+
+Through our implicit sampling procedure, we can generate samples using 
+
+\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \sum_i E_\theta (\tilde{\mathbb{x}}^{k-1}|c_i) + \omega^k.  \]
+
+
+<h3>Disjunction</h3>
+
+In concept disjunction, given separate concepts such as the colors red and blue, we wish to construct an output that is either red or blue. We wish to construct a new distribution that has probability mass when any chosen concept is true. A natural choice of such a distribution is the sum of the likelihood of each concept:
+
+\[ p(x|c_1 \; \text{or} \; c_2, \ldots \; \text{or}  \; c_i) \propto \sum_i p(x|c_i) / Z(c_i). \]
+
+where \( Z(c_i) \) denotes partition function for the chosen concept.
+
+Through our implicit sampling procedure, by assuming partition functions are equal, we can then generate samples using  
+
+\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \text{logsumexp}(-E(x|c_i))  + \omega^k \]
+
+<h3>Negation</h3>
+
+In concept negation, we wish to generate an output that does not contain the concept. Given a color red, we want an output that is of a different color, such as blue. Thus, we want to construct a distribution that places high likelihood to data that is outside a given concept. One choice is a distribution inversely proportional to the concept. Importantly, negation must be defined with respect to another concept to be useful. The opposite of alive may be dead, but not inanimate. Negation without a data distribution is not integrable and leads to a generation of chaotic textures which, while satisfying absence of a concept, is not desirable. Thus in our experiments with negation we combine it with another concept to ground the negation and obtain an integrable distribution:
+
+\[ p(x| \text{not}(c_1), c_2) \propto \frac{p(x|c_2)}{p(x|c_1)^\alpha} \propto e^{ \alpha  E(x|c_1) - E(x|c_2) } \]
+
+Through our implicit sampling procedure, by assuming partition functions are equal, we can then generate samples using
+
+\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} (\alpha E(x|c_1) - E(x|c_2)) + \omega^k \]
+
+
+By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
+
+<img src="fig/venn.pdf" width="1000"> </a></center>
+
+<h2>Compositional Generations</h2>
+
+We explore 
+
+<h3>Object Level Compositionality</h3>
+We can further define object level compositionality, by
+
+
+<h2>Continual Learning</h2>
+
 <a href=""><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="fig/paper_thumbnail.jpg" width=170></a>
 <br>
+
+We can further use our approach to incremently learn new concepts to 
+
+
+<h2>Compositional Inference</h2>
+
+<h3>Inference</h3>
+In addition to generation, we can also use our model to define inference across
+
+
 
 
 
@@ -96,9 +174,18 @@ BODY {
 <br><br>
 <h2>Related Work</h2>
 
+Here are some of our additional works on utilizing energy models:
+
 <ul id='relatedwork'>
 <li font-size: 15px>
- Yilun Du, Igor Mordatch <a href="https://papers.nips.cc/paper/8619-implicit-generation-and-modeling-with-energy-based-models"><strong>"Implicit Generation and Modeling with Energy Based Models"</strong></a>, in NIPS 2019.
+ Yilun Du, Igor Mordatch <a href="https://papers.nips.cc/paper/8619-implicit-generation-and-modeling-with-energy-based-models"><strong>"Implicit Generation and Modeling with Energy Based Models"</strong></a>, in NeurIPS 2019 (Spotlight).
+</li>
+<li font-size: 15px>
+ Yilun Du, Toru Lin, Igor Mordatch <a href="https://arxiv.org/abs/1909.06878"><strong>"Modeling Based Planning with Energy Based Models"</strong></a>, in CORL 2019.
+</li>
+<li font-size: 15px>
+ Yilun Du, Joshua Meier, Jerry Ma, Rob Fergus, Alexander Rives <a href="https://openreview.net/pdf?id=S1e_9xrFvS"><strong>"Energy-Based Models For Atomic-Resolution
+Protein Conformations"</strong></a>, in ICLR 2020 (Spotlight).
 </li>
 </ul>
 
