@@ -70,9 +70,32 @@ BODY {
   A vital aspect of human intelligence is the ability to compose increasingly complex concepts out of simpler ideas, enabling both rapid learning and adaptation of knowledge. In this paper we show that energy-based models can exhibit this ability by directly combining probability distributions. Samples from the combined distribution correspond to compositions of concepts. For example, given a distribution for smiling faces, and another for male faces, we can combine them to generate smiling male faces. This allows us to generate natural images that simultaneously satisfy conjunctions, disjunctions, and negations of concepts. We evaluate compositional generation abilities of our model on the CelebA dataset of natural faces and synthetic 3D scene images. We also demonstrate other unique advantages of our model, such as the ability to continually learn and incorporate new concepts, or infer compositions of concept properties underlying an image.
 </p></div>
 
-<!-- <a href=""><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="fig/paper_thumbnail.jpg" width=170></a> -->
+
+
+
+<!-- ---------------------------------------------------------------------------------- -->
+<a href=""><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="fig/paper_thumbnail.jpg" width=170></a>
 <br>
 
+
+<h2>Paper</h2>
+<p><a href="https://energy-based-model.github.io/compositional-generation-inference/fig/paper.pdf">arxiv</a>,  2019. </p>
+
+
+
+<h2>Citation</h2>
+<p>"Compositional Visual Generation and Inference with Energy Based Models", arxiv.
+<a href="fig/citation.txt">Bibtex</a>
+
+</p>
+
+
+<h2>Code: <a href=''>PyTorch</a> | <a href=''>Torch</a>  </h2>
+
+<br>
+
+
+<!-- ---------------------------------------------------------------------------------- -->
 <h2>Method</h2>
 
 Energy based models (EBMs) represent a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data is proportional to   \( \propto e^{-E_\theta(x)}\).
@@ -83,8 +106,6 @@ We can generate data from an EBM by implicit sampling through Langevin dynamics,
 
 
 By defining generation through such a manner, we can compose generation across different EBMs learned on attributes of position, size, color, gender, hair style, and age, through the symbolic operators of conjunction, disjunction, and negation. 
-
-<!-- <img src="https://energy-based-model.github.io/compositional-generation-inference/fig/comp_cartoon.jpg" width="1000"> </a></center> -->
 
 In particular, we consider a set of independently trained EBMs, \(E(\tilde{x}|c_1), E(\tilde{x}|c_2), \ldots,  E(\tilde{x}|c_n)\), which are learned conditional distributions on underlying latent codes $c_i$. Latent codes we consider include position, size, color, gender, hair style, and age, which we also refer to as concepts.
 
@@ -126,6 +147,9 @@ By definely particular combinations of EBMs trained on male, smiling, and black 
 
 <img src="https://energy-based-model.github.io/compositional-generation-inference/fig/venn.jpg" width="1000"> </a></center>
 
+
+
+<!-- ---------------------------------------------------------------------------------- -->
 <h2>Compositional Generations</h2>
 
 We explore 
@@ -149,23 +173,6 @@ In addition to generation, we can also use our model to define inference across
 
 
 
-
-
-<h2>Paper</h2>
-<p><a href="https://energy-based-model.github.io/compositional-generation-inference/fig/paper.pdf">arxiv</a>,  2017. </p>
-
-
-
-<h2>Citation</h2>
-<p>"Compositional Visual Generation and Inference with Energy Based Models", arxiv.
-<a href="fig/citation.txt">Bibtex</a>
-
-</p>
-
-
-<h2>Code: <a href=''>PyTorch</a> | <a href=''>Torch</a>  </h2>
-
-<br>
 
 
 
