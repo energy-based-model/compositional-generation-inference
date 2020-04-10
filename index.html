@@ -167,17 +167,17 @@ Surprisingly, we find that by composing additional models together, we are actua
 
 <h3>Higher Level Compositions</h3>
 
-An advantage of defining composition through the manipulation of probability distributions, is that we can nest these operators to specify particular generation. We showcase this composing specific identites over multiple different attributes.
+An advantage of defining composition through the manipulation of probability distributions is that we can nest these operators to specify particular generation. In the figure below, we show more specific generations as we compose more and more different attributes in a different manner.
 
 <img src="fig/symbolic.jpg" width="300"> </a></center>
 
 <h3>Object Level Compositionality</h3>
 
-In addition, we can also learn EBMs on the position attributes! Then, by applying conjunction to models, we further generate different compositions at the object level.
+In addition, we can also learn EBMs on the object attricutes. We train a single EBM model on representing the position attribute. By summing EBMs conditioned on two different positions (onjunction), we can compositionally generate different number of cubes at the object level.
 
 <img src="fig/multiobject.jpg" width="300"> </a></center>
 
-By conditioning generation on sum of EBMs on two different positions, we can get two cube generations in different locations.
+The last row shows that when cubes are too close to each other, a single cube is instead genereated.
 
 
 <h2>Continual Learning in Generation</h2>
@@ -198,7 +198,7 @@ A dataset consisting of color annotations of different color shapes  at differen
 </li>
 </ul>
 
-We train a new EBM model for attributes of position, shape and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the factor that position and shape models have not seen such combinations of data.
+We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations in data.
 
 <img src="fig/continuous.jpg" width="300"> </a></center>
 
@@ -216,13 +216,13 @@ If we know that a set of different \( x_i \) that all have the same underlying c
 
 <h3>Compositional Inference Across Multiple Views</h3>
 
-We test the above compositional reasoning on inferring the position of cube given different view of the image. By doing inference in such a manner, we find that we can obtain better predictions of positions.
+We test the above compositional reasoning on inferring the position of a cube given different view of the same image. By doing inference on the latent of EBM in the above manner, we find that we can obtain better predictions of positions.
 
 <img src="fig/multiobject.jpg" width="300"> </a></center>
 
 <h3>Compositional Inference In One Image</h3>
 
-We can further test the ability of our model to compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. A single EBM can compositionally infer the presence of multiple of cubes. 
+We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, while only trained on a single cube. 
 
 <img src="fig/multiobject_compositionality.jpg" width="300"> </a></center>
 
