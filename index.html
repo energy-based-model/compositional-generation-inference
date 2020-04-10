@@ -149,7 +149,7 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 
 By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
 
-<img src="fig/venn.jpg" width="800"> </a></center>
+<center><a><img src="fig/venn.jpg" width="800"> </a></center>
 
 
 
@@ -175,7 +175,7 @@ An advantage of defining composition through the manipulation of probability dis
 
 In addition, we can also learn EBMs on the object attricutes. We train a single EBM model on representing the position attribute. By summing EBMs conditioned on two different positions (onjunction), we can compositionally generate different number of cubes at the object level.
 
-<img src="fig/multiobject.jpg" width="300"> </a></center>
+<center><a> <img src="fig/multiobject.jpg" width="300"> </a></center>
 
 The last row shows that when cubes are too close to each other, a single cube is instead genereated.
 
@@ -200,7 +200,7 @@ A dataset consisting of color annotations of different color shapes  at differen
 
 We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations in data.
 
-<img src="fig/continuous.jpg" width="300"> </a></center>
+<center><a> <img src="fig/continuous.jpg" width="300"> </a></center>
 
 
 <h2>Compositional Inference</h2>
@@ -218,13 +218,13 @@ If we know that a set of different \( x_i \) that all have the same underlying c
 
 We test the above compositional reasoning on inferring the position of a cube given different view of the same image. By doing inference on the latent of EBM in the above manner, we find that we can obtain better predictions of positions.
 
-<img src="fig/multiobject.jpg" width="300"> </a></center>
+<center><a> <img src="fig/multiobject.jpg" width="300"> </a></center>
 
 <h3>Compositional Inference In One Image</h3>
 
 We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, while only trained on a single cube. 
 
-<img src="fig/multiobject_compositionality.jpg" width="300"> </a></center>
+<center><a> <img src="fig/multiobject_compositionality.jpg" width="300"> </a></center>
 
 
 <br><br>
