@@ -57,7 +57,7 @@ BODY {
   <sup>1</sup> MIT CSAIL&nbsp;&nbsp;&nbsp;
   <sup>2</sup> Google Brain
 </h2></center>
-<center><h2><strong><a href="">Paper</a> | <a href="">PyTorch code</a></strong> </h2></center>
+<center><h2><strong><a href="">Paper</a> | <a href="">Tensorflow code</a></strong> </h2></center>
 <br>
 
 
@@ -149,7 +149,7 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 
 By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
 
-<img src="fig/venn.jpg" width="1000"> </a></center>
+<img src="fig/venn.jpg" width="800"> </a></center>
 
 
 
@@ -208,11 +208,11 @@ We train a new EBM model for attributes of position, shape and color, and find t
 <h3>Inference</h3>
 In concept inference, we wish to infer the underlying concepts that best explains a given image. Given a learned EBM on \( E(x|c) \), we do inference to find the underlying concept \( c \) by
 
-\[ c = \argmin_c E(x|c) \]
+\[ c = \text{argmin}_c E(x|c) \]
 
 If we know that a set of different \( x_i \) that all have the same underlying concept \( c \), we can then use conjunction to obtain , 
 
-\[ c = \argmin_c \sum_i E(x_i|c) \]
+\[ c = \text{argmin}_c \sum_i E(x_i|c) \]
 
 <h3>Compositional Inference Across Multiple Views</h3>
 
