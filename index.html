@@ -149,7 +149,9 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 
 By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
 
+<br>
 <center><a><img src="fig/venn.jpg" width="800"> </a></center>
+<br>
 
 
 
@@ -169,13 +171,17 @@ Surprisingly, we find that by composing additional models together, we are actua
 
 An advantage of defining composition through the manipulation of probability distributions is that we can nest these operators to specify particular generation. In the figure below, we show more specific generations as we compose more and more different attributes in a different manner.
 
+<br>
 <img src="fig/symbolic.jpg" width="300"> </a></center>
+<br>
 
 <h3>Object Level Compositionality</h3>
 
 In addition, we can also learn EBMs on the object attricutes. We train a single EBM model on representing the position attribute. By summing EBMs conditioned on two different positions (onjunction), we can compositionally generate different number of cubes at the object level.
 
+<br>
 <center><a> <img src="fig/multiobject.jpg" width="300"> </a></center>
+<br>
 
 The last row shows that when cubes are too close to each other, a single cube is instead genereated.
 
@@ -200,7 +206,9 @@ A dataset consisting of color annotations of different color shapes  at differen
 
 We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations in data.
 
+<br>
 <center><a> <img src="fig/continuous.jpg" width="300"> </a></center>
+<br>
 
 
 <h2>Compositional Inference</h2>
