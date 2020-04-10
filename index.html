@@ -55,7 +55,7 @@ BODY {
   <a href="https://openai.com/blog/authors/igor/">Igor Mordatch<sup>2</sup></a></h2></center>
 <center><h2>
   <sup>1</sup> MIT CSAIL&nbsp;&nbsp;&nbsp;
-  <sup>2</sup> OpenAI
+  <sup>2</sup> Google Brain
 </h2></center>
 <center><h2><strong><a href="">Paper</a> | <a href="">PyTorch code</a></strong> </h2></center>
 <br>
@@ -95,7 +95,7 @@ BODY {
 </p>
 
 
-<h2>Code: <a href=''>PyTorch</a> | <a href=''>Torch</a>  </h2>
+<h2>Code: <a href=''>Tensorflow</a> </h2>
 
 <br><br>
 
@@ -156,28 +156,75 @@ By definely particular combinations of EBMs trained on male, smiling, and black 
 <!-- ---------------------------------------------------------------------------------- -->
 <h2>Compositional Generations</h2>
 
-We explore 
+We explore the ability of our models to compose across different attributes. We first condition on the attributes of shape, position, size and color attributes. Through the logical operator of conjunction, we can sequentially make more refined cube shapes through four independently trained EBMs.
+
+<img src="fig/com_cube.jpg" width="300"> </a></center>
+
+We can similarily condition different attributes of humans faces
+<img src="fig/com_human.jpg" width="300"> </a></center>
+
+Surprisingly, we find that by composing additional models together, we are actual able to make higher resolution images.
+
+<h3>Higher Level Compositions</h3>
+
+An advantage of defining composition through the manipulation of probability distributions, is that we can nest these operators to specify particular generation. We showcase this composing specific identites over multiple different attributes.
+
+<img src="fig/symbolic.jpg" width="300"> </a></center>
 
 <h3>Object Level Compositionality</h3>
-We can further define object level compositionality, by
+
+In addition, we can also learn EBMs on the position attributes! Then, by applying conjunction to models, we further generate different compositions at the object level.
+
+<img src="fig/multiobject.jpg" width="300"> </a></center>
+
+By conditioning generation on sum of EBMs on two different positions, we can get two cube generations in different locations.
 
 
-<h2>Continual Learning</h2>
+<h2>Continual Learning in Generation</h2>
 
+By composing independent models sequentially, we can further use our learned models to generalize and extrapolate to a newly learned concepts. To test this we consider:
 
-We can further use our approach to incremently learn new concepts to 
+<ul id='continual_dataset'>
+<li font-size: 15px>
+A dataset consisting of position annotations of  purple cubes at different positions.
+</li>
+
+<li font-size: 15px>
+A dataset consisting of shape annotations of different purple shapes at different positions
+</li>
+
+<li font-size: 15px>
+A dataset consisting of color annotations of different color shapes  at different position
+</li>
+</ul>
+
+We train a new EBM model for attributes of position, shape and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the factor that position and shape models have not seen such combinations of data.
+
+<img src="fig/continuous.jpg" width="300"> </a></center>
 
 
 <h2>Compositional Inference</h2>
 
 <h3>Inference</h3>
-In addition to generation, we can also use our model to define inference across
+In concept inference, we wish to infer the underlying concepts that best explains a given image. Given a learned EBM on \( E(x|c) \), we do inference to find the underlying concept \( c \) by
 
+\[ c = \argmin_c E(x|c) \]
 
+If we know that a set of different \( x_i \) that all have the same underlying concept \( c \), we can then use conjunction to obtain , 
 
+\[ c = \argmin_c \sum_i E(x_i|c) \]
 
+<h3>Compositional Inference Across Multiple Views</h3>
 
+We test the above compositional reasoning on inferring the position of cube given different view of the image. By doing inference in such a manner, we find that we can obtain better predictions of positions.
 
+<img src="fig/multiobject.jpg" width="300"> </a></center>
+
+<h3>Compositional Inference In One Image</h3>
+
+We can further test the ability of our model to compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. A single EBM can compositionally infer the presence of multiple of cubes. 
+
+<img src="fig/multiobject_compositionality.jpg" width="300"> </a></center>
 
 
 <br><br>
