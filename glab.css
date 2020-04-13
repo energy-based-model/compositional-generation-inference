@@ -5,7 +5,7 @@ BODY {
     FONT-SIZE: small; COLOR: black; FONT-FAMILY: Georgia, "New Century Schoolbook", Times, serif; BACKGROUND-COLOR: white
 }
 IMG {
-    BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+    BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; CLEAR: both
 }
 H1 {
     FONT-WEIGHT: normal

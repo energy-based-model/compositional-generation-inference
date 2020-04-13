@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 // redefining default features
-var _POPUP_FEATURES = 'width=500,height=300,resizable=1,scrollbars=1,titlebar=1,status=1';
+var _POPUP_FEATURES = 'width=1000,height=1000,resizable=1,scrollbars=1,titlebar=1,status=1';
 </script>
 <link media="all" href="glab.css" type="text/css" rel="StyleSheet">
 <style type="text/css" media="all">
@@ -100,18 +100,19 @@ BODY {
 <br><br>
 
 <!-- ---------------------------------------------------------------------------------- -->
+<p>
 <h2>Method</h2>
 
-Energy based models (EBMs) represent a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data is proportional to   \( \propto e^{-E_\theta(x)}\).
+Energy based models <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-06.pdf">(EBMs) </a> represent a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data is proportional to \( \propto e^{-E_\theta(x)}\).
 
 
-We can generate data from an EBM by implicit sampling through Langevin dynamics, where samples are sequentially refined, following the procedure
+We can generate data from an EBM by implicit sampling through <a href="https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf"> Langevin dynamics </a>, where samples are sequentially refined, following the procedure
 \[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} E_\theta (\tilde{\mathbb{x}}^{k-1}) + \omega^k, \; \omega^k \sim \mathcal{N}(0,\lambda), \]
 
 
 By defining generation through such a manner, we can compose generation across different EBMs learned on attributes of position, size, color, gender, hair style, and age, through the symbolic operators of conjunction, disjunction, and negation. 
 
-In particular, we consider a set of independently trained EBMs, \(E(\tilde{x}|c_1), E(\tilde{x}|c_2), \ldots,  E(\tilde{x}|c_n)\), which are learned conditional distributions on underlying latent codes $c_i$. Latent codes we consider include position, size, color, gender, hair style, and age, which we also refer to as concepts.
+In particular, we consider a set of independently trained EBMs, \(E(\tilde{x}|c_1), E(\tilde{x}|c_2), \ldots,  E(\tilde{x}|c_n)\), which are learned conditional distributions on underlying latent codes \( c_i \). Latent codes we consider include position, size, color, gender, hair style, and age, which we also refer to as concepts.
 
 <h3>Conjunction</h3>
 
@@ -148,48 +149,59 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 
 
 By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
+</p>
 
+<p>
 <br>
-<center><a><img src="fig/venn.jpg" width="800"> </a></center>
+<center><img src="fig/venn.jpg" width="1000"> </center>
 <br>
+</p>
 
 
-
-<!-- ---------------------------------------------------------------------------------- -->
+<p>
 <h2>Compositional Generations</h2>
 
 We explore the ability of our models to compose across different attributes. We first condition on the attributes of shape, position, size and color attributes. Through the logical operator of conjunction, we can sequentially make more refined cube shapes through four independently trained EBMs.
+</p>
 
-<img src="fig/com_cube.jpg" width="300"> </a></center>
+<p>
+<center><img src="fig/com_cube.jpg" style="float:none;width:500px"> </center>
+</p>
 
 We can similarily condition different attributes of humans faces
-<img src="fig/com_human.jpg" width="300"> </a></center>
 
+<p>
+<center><img src="fig/com_human.jpg" style="float:none;width:500px"> </center>
+</p>
+
+<p>
 Surprisingly, we find that by composing additional models together, we are actual able to make higher resolution images.
 
 <h3>Higher Level Compositions</h3>
 
 An advantage of defining composition through the manipulation of probability distributions is that we can nest these operators to specify particular generation. In the figure below, we show more specific generations as we compose more and more different attributes in a different manner.
+</p>
 
-<br>
-<br>
-<img src="fig/symbolic.jpg" width="300"> </a></center>
-<br>
-<br>
+<p>
+<center><a><img src="fig/symbolic.jpg" style="float:none;width:500px"> </a></center>
+</p>
 
+<p>
 <h3>Object Level Compositionality</h3>
 
 In addition, we can also learn EBMs on the object attricutes. We train a single EBM model on representing the position attribute. By summing EBMs conditioned on two different positions (onjunction), we can compositionally generate different number of cubes at the object level.
 
-<br>
-<br>
-<center><a> <img src="fig/multiobject.jpg" width="300"> </a></center>
-<br>
-<br>
+</p>
+<p>
+<center><a> <img src="fig/multiobject.jpg" style="float:none;width:500px"> </a></center>
+</p>
 
+<p>
 The last row shows that when cubes are too close to each other, a single cube is instead genereated.
+</p>
 
 
+<p>
 <h2>Continual Learning in Generation</h2>
 
 By composing independent models sequentially, we can further use our learned models to generalize and extrapolate to a newly learned concepts. To test this we consider:
@@ -210,13 +222,13 @@ A dataset consisting of color annotations of different color shapes  at differen
 
 We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations in data.
 
-<br>
-<br>
-<center><a> <img src="fig/continuous.jpg" width="300"> </a></center>
-<br>
-<br>
+</p>
+<p>
+<center><a> <img src="fig/continuous.jpg" style="float:none;width:500px"> </a></center>
+</p>
 
 
+<p>
 <h2>Compositional Inference</h2>
 
 <h3>Inference</h3>
@@ -232,23 +244,19 @@ If we know that a set of different \( x_i \) that all have the same underlying c
 
 We test the above compositional reasoning on inferring the position of a cube given different view of the same image. By doing inference on the latent of EBM in the above manner, we find that we can obtain better predictions of positions.
 
-<br>
-<br>
-<center><a> <img src="fig/multiobj.jpg" width="300"> </a></center>
-<br><br>
+<center><a> <img src="fig/multiobj.jpg" style="float:none;width:500px"> </a></center>
 
 <h3>Compositional Inference In One Image</h3>
 
 We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, while only trained on a single cube. 
 
-<br>
-<br>
-<center><a> <img src="fig/multiobject_compositionality.jpg" width="300"> </a></center>
-<br><br>
+<center><a> <img src="fig/multiobject_compositionality.jpg" style="float:none;width:500px"> </a></center>
+</p>
 
-<h2>Related Work</h2>
+<p>
+<h2>Our Additional Work</h2>
 
-Here are some of our additional works on utilizing energy models:
+If interested, here is our additional works on utilizing energy models:
 
 <ul id='relatedwork'>
 <li font-size: 15px>
@@ -262,6 +270,7 @@ Here are some of our additional works on utilizing energy models:
 Protein Conformations"</strong></a>, in ICLR 2020 (Spotlight).
 </li>
 </ul>
+</p>
 
 
 
