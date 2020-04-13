@@ -61,10 +61,12 @@ BODY {
 <br>
 
 
+<!---
 <center><a>
 <img src="fig/comp_cartoon.jpg" width="1000"> 
 </a></center>
 <br>
+-->
 
 
 
@@ -124,6 +126,10 @@ Through our implicit sampling procedure, we can generate samples using
 
 \[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \sum_i E_\theta (\tilde{\mathbb{x}}^{k-1}|c_i) + \omega^k.  \]
 
+<center><a>
+<img src="fig/conjunction.jpg" style="float:none;width:400px"> 
+</a></center>
+
 
 <h3>Disjunction</h3>
 
@@ -137,6 +143,10 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 
 \[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \text{logsumexp}(-E(x|c_i))  + \omega^k \]
 
+<center><a>
+<img src="fig/disjunction.jpg" style="float:none;width:400px"> 
+</a></center>
+
 <h3>Negation</h3>
 
 In concept negation, we wish to generate an output that does not contain the concept. Given a color red, we want an output that is of a different color, such as blue. Thus, we want to construct a distribution that places high likelihood to data that is outside a given concept. One choice is a distribution inversely proportional to the concept. Importantly, negation must be defined with respect to another concept to be useful. The opposite of alive may be dead, but not inanimate. Negation without a data distribution is not integrable and leads to a generation of chaotic textures which, while satisfying absence of a concept, is not desirable. Thus in our experiments with negation we combine it with another concept to ground the negation and obtain an integrable distribution:
@@ -148,12 +158,17 @@ Through our implicit sampling procedure, by assuming partition functions are equ
 \[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} (\alpha E(x|c_1) - E(x|c_2)) + \omega^k \]
 
 
-By definely particular combinations of EBMs trained on male, smiling, and black haired faces, we are able to obtain generations shown below:
 </p>
 
+<center><a>
+<img src="fig/negation.jpg" style="float:none;width:400px"> 
+</a></center>
+
+
+By combining the above operators, we can controllably generate images with complex relationships. For example, given EBMs trained on male, smiling, and black haired faces, through combinations of negation, disjunction and conjunction, we can selectively generate images in a Venn diagram as shown below:
 <p>
 <br>
-<center><img src="fig/venn.jpg" width="1000"> </center>
+<center><img src="fig/venn.jpg" style="float:none;width:700px"> </center>
 <br>
 </p>
 
@@ -193,7 +208,7 @@ In addition, we can also learn EBMs on the object attricutes. We train a single 
 
 </p>
 <p>
-<center><a> <img src="fig/multiobject.jpg" style="float:none;width:500px"> </a></center>
+<center><a> <img src="fig/multiobject.jpg" style="float:none;width:400px"> </a></center>
 </p>
 
 <p>
@@ -207,15 +222,15 @@ The last row shows that when cubes are too close to each other, a single cube is
 By composing independent models sequentially, we can further use our learned models to generalize and extrapolate to a newly learned concepts. To test this we consider:
 
 <ul id='continual_dataset'>
-<li font-size: 15px>
+<li>
 A dataset consisting of position annotations of  purple cubes at different positions.
 </li>
 
-<li font-size: 15px>
+<li>
 A dataset consisting of shape annotations of different purple shapes at different positions
 </li>
 
-<li font-size: 15px>
+<li>
 A dataset consisting of color annotations of different color shapes  at different position
 </li>
 </ul>
@@ -224,7 +239,7 @@ We train a new EBM model for attributes of position, shape, and color, and find 
 
 </p>
 <p>
-<center><a> <img src="fig/continuous.jpg" style="float:none;width:500px"> </a></center>
+<center><a> <img src="fig/continuous.jpg" style="float:none;width:400px"> </a></center>
 </p>
 
 
