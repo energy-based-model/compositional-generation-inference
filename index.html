@@ -175,26 +175,22 @@ By combining the above operators, we can controllably generate images with compl
 <p>
 <h2>Compositional Generations</h2>
 
-We explore the ability of our models to compose across different attributes. We first condition on the attributes of shape, position, size and color attributes. Through the logical operator of conjunction, we can sequentially make more refined cube shapes through four independently trained EBMs.
-</p>
+We first explore the ability of our models to compose across different attributes. We train seperate EBMs on the attributes of shape, position, size and color. Through conjunction on each model sequentially, we are able to generate successively more refined versions of an object scene.
 
-<p>
 <center><img src="fig/com_cube.jpg" style="float:none;width:500px"> </center>
 </p>
 
-We can similarily condition different attributes of humans faces
+We can similarily train seperate EBMs on the attributes of young, female, smiling, and wavy hair. Through conjunction on each model sequentially, we are able to generate successively more refined versions of human faces.
 
 <p>
 <center><img src="fig/com_human.jpg" style="float:none;width:400px"> </center>
 </p>
 
-<p>
-Surprisingly, we find that by composing additional models together, we are actual able to make higher resolution images.
+Surprisingly, we find that generations of our model are able to become increasingly more refined by adding more models.
 
 <h3>Higher Level Compositions</h3>
 
-An advantage of defining composition through the manipulation of probability distributions is that we can nest these operators to specify particular generation. In the figure below, we show more specific generations as we compose more and more different attributes in a different manner.
-</p>
+We can further compose seperately trained models in additional ways by nesting operations of conjunction, disjunction and negation. In the figure below, we showcase face generations by nesting compositions of each operator.
 
 <p>
 <center><a><img src="fig/symbolic.jpg" style="float:none;width:400px"> </a></center>
@@ -203,38 +199,36 @@ An advantage of defining composition through the manipulation of probability dis
 <p>
 <h3>Object Level Compositionality</h3>
 
-In addition, we can also learn EBMs on the object attricutes. We train a single EBM model on representing the position attribute. By summing EBMs conditioned on two different positions (onjunction), we can compositionally generate different number of cubes at the object level.
+We can also learn EBMs on the object attributes. We train a single EBM model to represent the position attribute. By summing EBMs conditioned on two different positions (conjunction), we can compositionally generate different number of cubes at the object level.
 
 </p>
 <p>
 <center><a> <img src="fig/multiobject.jpg" style="float:none;width:250px"> </a></center>
 </p>
 
-<p>
-The last row shows that when cubes are too close to each other, a single cube is instead genereated.
-</p>
-
+Suprisingly, we find that when conditioned cubes are too close to each other, a single cube is instead genereated.
 
 <p>
 <h2>Continual Learning in Generation</h2>
 
-By composing independent models sequentially, we can further use our learned models to generalize and extrapolate to a newly learned concepts. To test this we consider:
+By having the ability to compose independently models, EBMs allow us to continually learn to generate new images with both new and old visual concepts. To test this we consider:
 
+<br>
 <ul id='continual_dataset'>
-<li>
-A dataset consisting of position annotations of  purple cubes at different positions.
+<li font-size: 6px>
+A dataset consisting of position annotations of purple cubes at different positions.
 </li>
 
-<li>
-A dataset consisting of shape annotations of different purple shapes at different positions
+<li font-size: 6px>
+A dataset consisting of shape annotations of different purple shapes at different positions.
 </li>
 
-<li>
-A dataset consisting of color annotations of different color shapes  at different position
+<li font-size: 6px>
+A dataset consisting of color annotations of different color shapes at different positions.
 </li>
 </ul>
 
-We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations in data.
+We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations during training.
 
 </p>
 <p>
@@ -262,7 +256,7 @@ We test the above compositional reasoning on inferring the position of a cube gi
 
 <h3>Compositional Inference In One Image</h3>
 
-We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, while only trained on a single cube. 
+We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, despite only being trained on a single cube. 
 
 <center><a> <img src="fig/multiobject_compositionality.jpg" style="float:none;width:400px"> </a></center>
 </p>
@@ -270,7 +264,7 @@ We can further test the ability of our model to implicitly compositionally infer
 
 <h2>Additional Related Work</h2>
 
-Here are some related works to the content in this paper:
+Here are some related works to the content presented in this paper:
 
 <ul id='relatedwork'>
 <li font-size: 15px>
@@ -291,7 +285,7 @@ See our paper for a more comprehensive list of references.
 
 <h2>Our Additional Work on Energy-Based Models</h2>
 
-If interested, here is our additional works on utilizing energy models:
+If interested, here are additional works from us on utilizing energy models:
 
 <ul id='relatedwork'>
 <li font-size: 15px>
