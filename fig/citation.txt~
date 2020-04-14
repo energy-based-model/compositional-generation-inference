@@ -1,6 +1,6 @@
 @inproceedings{DuComp2019,
   title={Compositional Visual Generation and Inference with Energy Based Models},
   author={Du, Yilun and Li, Shuang and Mordatch, Igor},
-  booktitle={arXiv preprint },
+  booktitle={arXiv preprint arxiv:},
   year={2019}
 }
