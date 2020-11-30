@@ -1,6 +1,6 @@
-@inproceedings{DuComp2019,
+@inproceedings{DuComp2020,
   title={Compositional Visual Generation and Inference with Energy Based Models},
   author={Du, Yilun and Li, Shuang and Mordatch, Igor},
-  booktitle={arXiv preprint arxiv:2004.06030},
-  year={2019}
+  booktitle={NeurIPS 2020},
+  year={2020}
 }
