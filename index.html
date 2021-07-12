@@ -1,327 +1,343 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-  <title>Compositional Visual Generation and Inference with Energy Based Models</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Compositional Visual Generation with Energy Based Models">
+    <meta name="author"
+          content="Yilun Du, Shuang Li, Igor Mordatch">
 
-<meta property="og:image" content="fig/comp_cartoon.jpg"/>
-<meta property="og:title" content="Compositional Visual Generation and Inference with Energy Based Models" />
+    <title>Compositional Visual Generation with Energy Based Models</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<script src="lib.js" type="text/javascript"></script>
-<script src="popup.js" type="text/javascript"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-53682931-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<script type="text/javascript">
-// redefining default features
-var _POPUP_FEATURES = 'width=1000,height=1000,resizable=1,scrollbars=1,titlebar=1,status=1';
-</script>
-<link media="all" href="glab.css" type="text/css" rel="StyleSheet">
-<style type="text/css" media="all">
-IMG {
-    PADDING-RIGHT: 0px;
-    PADDING-LEFT: 0px;
-    FLOAT: right;
-    PADDING-BOTTOM: 0px;
-    PADDING-TOP: 0px
-}
-#primarycontent {
-    MARGIN-LEFT: auto; ; WIDTH: expression(document.body.clientWidth >
-1000? "1000px": "auto" ); MARGIN-RIGHT: auto; TEXT-ALIGN: left; max-width:
-1000px }
-BODY {
-    TEXT-ALIGN: center
-}
-</style>
-
-<meta content="MSHTML 6.00.2800.1400" name="GENERATOR"><script src="b5m.js" id="b5mmain" type="text/javascript"></script></head>
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+    <!--    <link rel="icon" href="img/favicon.gif" type="image/gif">-->
+</head>
 
 <body>
-
-<div id="primarycontent">
-<center><h1>Compositional Visual Generation and Inference with Energy Based Models</h1></center>
-<center><h2><a href="https://yilundu.github.io/">Yilun Du<sup>1</sup></a>&nbsp;&nbsp;&nbsp;
-  <a href="http://www.mit.edu/~lishuang/">Shuang Li<sup>1</sup></a>&nbsp;&nbsp;&nbsp;
-  <a href="https://scholar.google.com/citations?user=Vzr1RukAAAAJ&hl=en">Igor Mordatch<sup>2</sup></a></h2></center>
-<center><h2>
-  <sup>1</sup> MIT CSAIL&nbsp;&nbsp;&nbsp;
-  <sup>2</sup> Google Brain
-</h2></center>
-<center><h2><strong><a href="https://arxiv.org/pdf/2004.06030.pdf">Paper</a> | <a href="https://github.com/yilundu/ebm_compositionality">Tensorflow code</a></strong> </h2></center>
-<br>
-
-
-<!---
-<center><a>
-<img src="fig/comp_cartoon.jpg" width="1000"> 
-</a></center>
-<br>
--->
-
-
-
-<p>
-<h2>Abstract</h2>
-
-<div style="font-size:14px"><p align="justify">
-  A vital aspect of human intelligence is the ability to compose increasingly complex concepts out of simpler ideas, enabling both rapid learning and adaptation of knowledge. In this paper we show that energy-based models can exhibit this ability by directly combining probability distributions. Samples from the combined distribution correspond to compositions of concepts. For example, given a distribution for smiling faces, and another for male faces, we can combine them to generate smiling male faces. This allows us to generate natural images that simultaneously satisfy conjunctions, disjunctions, and negations of concepts. We evaluate compositional generation abilities of our model on the CelebA dataset of natural faces and synthetic 3D scene images. We also demonstrate other unique advantages of our model, such as the ability to continually learn and incorporate new concepts, or infer compositions of concept properties underlying an image.
+<div class="jumbotron jumbotron-fluid">
+    <div class="container"></div>
+    <h2>Compositional Visual Generation with Energy Based Models</h2>
+    <h3>NeurIPS 2020 (Spotlight)</h3>
+    <hr>
+    <p class="authors">
+        <a href="https://yilundu.github.io">Yilun Du</a>,
+        <a href="https://people.csail.mit.edu/lishuang/"> Shuang Li</a>,
+        <a href="">Igor Mordatch</a>
+    </p>
+    <div class="btn-group" role="group" aria-label="Top menu">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2004.06030">Paper</a>
+        <a class="btn btn-primary" href="https://github.com/yilundu/ebm_compositionality">Code</a>
+    </div>
 </div>
-</p>
 
 
-
-<!-- ---------------------------------------------------------------------------------- -->
-<a href=""><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="fig/paper_thumbnail.jpg" width=170></a>
-<br>
-
-
-<h2>Paper</h2>
-<p><a href="https://arxiv.org/pdf/2004.06030.pdf">Neurips 2020 (Spotlight).</a></p>
-
-
-<h2>Citation</h2>
-<p>Yilun Du, Shuang Li, Igor Mordatch. "Compositional Visual Generation and Inference with Energy Based Models", NeurIPS 2020 (spotlight).
-<a href="fig/citation.txt">Bibtex</a>
-
-</p>
-
-
-<h2>Code: <a href='https://github.com/yilundu/ebm_compositionality'>Tensorflow</a> </h2>
-
-<br><br>
-
-<!-- ---------------------------------------------------------------------------------- -->
-<p>
-<h2>Method</h2>
-
-Energy based models <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-06.pdf">(EBMs) </a> represent a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data is proportional to \( \propto e^{-E_\theta(x)}\).
-
-
-We can generate data from an EBM by implicit sampling through <a href="https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf"> Langevin dynamics </a>, where samples are sequentially refined, following the procedure
-\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} E_\theta (\tilde{\mathbb{x}}^{k-1}) + \omega^k, \; \omega^k \sim \mathcal{N}(0,\lambda), \]
-
-
-By defining generation through such a manner, we can compose generation across different EBMs learned on attributes of position, size, color, gender, hair style, and age, through the symbolic operators of conjunction, disjunction, and negation. 
-
-In particular, we consider a set of independently trained EBMs, \(E(\tilde{x}|c_1), E(\tilde{x}|c_2), \ldots,  E(\tilde{x}|c_n)\), which are learned conditional distributions on underlying latent codes \( c_i \). Latent codes we consider include position, size, color, gender, hair style, and age, which we also refer to as concepts.
-
-<h3>Conjunction</h3>
-
-In concept conjunction, given separate independent concepts (such as a particular gender, hair style, or facial expression), we wish to construct an generation with the specified gender, hair style, and facial expression -- the combination of each concept. The likelihood of such an generation given a set of specific concepts is equal to the product of the likelihood of each individual concept
-
-\[ p(x|c_1 \; \text{and} \; c_2, \ldots, \; \text{and} \; c_i) = \prod_i p(x|c_i) \propto e^{-\sum_i E(x|c_i)}. \]
-
-Through our implicit sampling procedure, we can generate samples using 
-
-\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \sum_i E_\theta (\tilde{\mathbb{x}}^{k-1}|c_i) + \omega^k.  \]
-
-<center><a>
-<img src="fig/conjunction.jpg" style="float:none;width:300px"> 
-</a></center>
-
-
-<h3>Disjunction</h3>
-
-In concept disjunction, given separate concepts such as the colors red and blue, we wish to construct an output that is either red or blue. We wish to construct a new distribution that has probability mass when any chosen concept is true. A natural choice of such a distribution is the sum of the likelihood of each concept:
-
-\[ p(x|c_1 \; \text{or} \; c_2, \ldots \; \text{or}  \; c_i) \propto \sum_i p(x|c_i) / Z(c_i). \]
-
-where \( Z(c_i) \) denotes partition function for the chosen concept.
-
-Through our implicit sampling procedure, by assuming partition functions are equal, we can then generate samples using  
-
-\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} \text{logsumexp}(-E(x|c_i))  + \omega^k \]
-
-<center><a>
-<img src="fig/disjunction.jpg" style="float:none;width:300px"> 
-</a></center>
-
-<h3>Negation</h3>
-
-In concept negation, we wish to generate an output that does not contain the concept. Given a color red, we want an output that is of a different color, such as blue. Thus, we want to construct a distribution that places high likelihood to data that is outside a given concept. One choice is a distribution inversely proportional to the concept. Importantly, negation must be defined with respect to another concept to be useful. The opposite of alive may be dead, but not inanimate. Negation without a data distribution is not integrable and leads to a generation of chaotic textures which, while satisfying absence of a concept, is not desirable. Thus in our experiments with negation we combine it with another concept to ground the negation and obtain an integrable distribution:
-
-\[ p(x| \text{not}(c_1), c_2) \propto \frac{p(x|c_2)}{p(x|c_1)^\alpha} \propto e^{ \alpha  E(x|c_1) - E(x|c_2) } \]
-
-Through our implicit sampling procedure, by assuming partition functions are equal, we can then generate samples using
-
-\[ \tilde{\mathbb{x}}^k = \tilde{\mathbb{x}}^{k-1} - \frac{\lambda}{2} \nabla_\mathbb{x} (\alpha E(x|c_1) - E(x|c_2)) + \omega^k \]
-
-
-</p>
-
-<center><a>
-<img src="fig/negation.jpg" style="float:none;width:300px"> 
-</a></center>
-
-
-By combining the above operators, we can controllably generate images with complex relationships. For example, given EBMs trained on male, smiling, and black haired faces, through combinations of negation, disjunction and conjunction, we can selectively generate images in a Venn diagram as shown below:
-<p>
-<br>
-<center><img src="fig/venn.jpg" style="float:none;width:700px"> </center>
-<br>
-</p>
-
-
-<p>
-<h2>Compositional Generations</h2>
-
-We first explore the ability of our models to compose across different attributes. We train seperate EBMs on the attributes of shape, position, size and color. Through conjunction on each model sequentially, we are able to generate successively more refined versions of an object scene.
-
-<center><img src="fig/com_cube.jpg" style="float:none;width:500px"> </center>
-</p>
-
-We can similarily train seperate EBMs on the attributes of young, female, smiling, and wavy hair. Through conjunction on each model sequentially, we are able to generate successively more refined versions of human faces.
-
-<p>
-<center><img src="fig/com_human.jpg" style="float:none;width:400px"> </center>
-</p>
-
-Surprisingly, we find that generations of our model are able to become increasingly more refined by adding more models.
-
-<h3>Higher Level Compositions</h3>
-
-We can further compose seperately trained models in additional ways by nesting operations of conjunction, disjunction and negation. In the figure below, we showcase face generations by nesting compositions of each operator.
-
-<p>
-<center><a><img src="fig/symbolic.jpg" style="float:none;width:400px"> </a></center>
-</p>
-
-<p>
-<h3>Object Level Compositionality</h3>
-
-We can also learn EBMs on the object attributes. We train a single EBM model to represent the position attribute. By summing EBMs conditioned on two different positions (conjunction), we can compositionally generate different number of cubes at the object level.
-
-</p>
-<p>
-<center><a> <img src="fig/multiobject.jpg" style="float:none;width:250px"> </a></center>
-</p>
-
-Suprisingly, we find that when conditioned cubes are too close to each other, a single cube is instead genereated.
-
-<p>
-<h2>Continual Learning in Generation</h2>
-
-By having the ability to compose independently models, EBMs allow us to continually learn to generate new images with both new and old visual concepts. To test this we consider:
-
-<br>
-<br>
-<ul id='continual_dataset'>
-<li font-size: 6px>
-A dataset consisting of position annotations of purple cubes at different positions.
-</li>
-
-<li font-size: 6px>
-A dataset consisting of shape annotations of different purple shapes at different positions.
-</li>
-
-<li font-size: 6px>
-A dataset consisting of color annotations of different color shapes at different positions.
-</li>
-</ul>
-
-We train a new EBM model for attributes of position, shape, and color, and find that composing our three attribute EBMs together, we can precisely generate shapes of different position, shape and color objects! This is inspite of the fact that the position and shape models have not seen many such possible combinations during training.
-
-</p>
-<p>
-<center><a> <img src="fig/continuous.jpg" style="float:none;width:300px"> </a></center>
-</p>
-
-
-<p>
-<h2>Compositional Inference</h2>
-
-<h3>Inference</h3>
-In concept inference, we wish to infer the underlying concepts that best explains a given image. Given a learned EBM on \( E(x|c) \), we do inference to find the underlying concept \( c \) by
-
-\[ c = \text{argmin}_c E(x|c) \]
-
-If we know that a set of different \( x_i \) that all have the same underlying concept \( c \), we can then use conjunction to obtain , 
-
-\[ c = \text{argmin}_c \sum_i E(x_i|c) \]
-
-<h3>Compositional Inference Across Multiple Views</h3>
-
-We test the above compositional reasoning on inferring the position of a cube given different view of the same image. By doing inference on the latent of EBM in the above manner, we find that we can obtain better predictions of positions.
-
-<center><a> <img src="fig/multiobj.jpg" style="float:none;width:400px"> </a></center>
-
-<h3>Compositional Inference In One Image</h3>
-
-We can further test the ability of our model to implicitly compositionally infer the positions of multiple cubes when the model is trained on scenes with a single cube at different positions. We show the positions that are assigned low energy by our EBM in a heatmap below. We find that a single EBM can compositionally infer the presence of multiple cubes, despite only being trained on a single cube. 
-
-<center><a> <img src="fig/multiobject_compositionality.jpg" style="float:none;width:400px"> </a></center>
-</p>
-
-
-<h2>Additional Related Work</h2>
-
-Here are some related works to the content presented in this paper:
-
-<ul id='relatedwork'>
-<li font-size: 15px>
- Geoffrey E. Hinton <a href="https://www.cs.toronto.edu/~hinton/absps/tr00-004.pdf"><strong>"Training Products of Experts by Minimizing Contrastive Divergence"</strong></a>
-</li>
-<li font-size: 15px>
- Yann LeCun, Sumit Chopra, Raia Hadsell, Marc'Aurelio Ranzato, and Fu Jie Huang <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-06.pdf"><strong>"A Tutorial on Energy-Based Learning"</strong></a>
-</li>
-<li font-size: 15px>
- Ramakrishna Vedantam, Ian Fischer, Jonathan Huang, Kevin Murphy <a href="https://arxiv.org/abs/1705.10762"><strong>"Generative Models of Visually Grounded Imagination"</strong></a>
-</li>
-<li font-size: 15px>
- Irina Higgins, Nicolas Sonnerat, Loic Matthey, Arka Pal, Christopher P Burgess, Matko Bosnjak, Murray Shanahan, Matthew Botvinick, Demis Hassabis, Alexander Lerchner <a href="https://arxiv.org/abs/1707.03389"><strong>"SCAN: Learning Hierarchical Compositional Visual Concepts"</strong></a>
-</li>
-</ul>
-
-See our paper for a more comprehensive list of references.
-
-<h2>Our Additional Work on Energy-Based Models</h2>
-
-If interested, here are additional works from us on utilizing energy models:
-
-<ul id='relatedwork'>
-<li font-size: 15px>
- Yilun Du, Igor Mordatch <a href="https://papers.nips.cc/paper/8619-implicit-generation-and-modeling-with-energy-based-models"><strong>"Implicit Generation and Modeling with Energy Based Models"</strong></a>, in NeurIPS 2019 (Spotlight).
-</li>
-<li font-size: 15px>
- Yilun Du, Toru Lin, Igor Mordatch <a href="https://arxiv.org/abs/1909.06878"><strong>"Modeling Based Planning with Energy Based Models"</strong></a>, in CORL 2019.
-</li>
-<li font-size: 15px>
- Yilun Du, Joshua Meier, Jerry Ma, Rob Fergus, Alexander Rives <a href="https://openreview.net/pdf?id=S1e_9xrFvS"><strong>"Energy-Based Models For Atomic-Resolution
-Protein Conformations"</strong></a>, in ICLR 2020 (Spotlight).
-</li>
-</ul>
-
-
-<center>
-  <a href="http://accessibility.mit.edu/">Accessibility</a>
-</center>
-
-
-<!---
-<br>
-<h2>Acknowledgement</h2>
-<p align="justify"></p>
--->
-
-<div style="display:none">
-<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
-<script type="text/javascript">_gos='c3.gostats.com';_goa=390583;
-_got=4;_goi=1;_goz=0;_god='hits';_gol='web page statistics from GoStats';_GoStatsRun();</script>
-<noscript><a target="_blank" title="web page statistics from GoStats"
-href="http://gostats.com"><img alt="web page statistics from GoStats"
-src="http://c3.gostats.com/bin/count/a_390583/t_4/i_1/z_0/show_hits/counter.png"
-style="border-width:0" /></a></noscript>
-</div>
-</body></html
->
-
+<div class="container">
+    <div class="section">
+        <p>
+          A vital aspect of human intelligence is the ability to compose increasingly complex concepts out of simpler ideas, enabling both rapid learning and adaptation of knowledge. In this paper we show that energy-based models can exhibit this ability by directly combining probability distributions. Samples from the combined distribution correspond to compositions of concepts. For example, given a distribution for smiling faces, and another for male faces, we can combine them to generate smiling male faces. This allows us to generate natural images that simultaneously satisfy conjunctions, disjunctions, and negations of concepts. We evaluate compositional generation abilities of our model on the CelebA dataset of natural faces and synthetic 3D scene images. We also demonstrate other unique advantages of our model, such as the ability to continually learn and incorporate new concepts, or infer compositions of concept properties underlying an image.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>The Problem with Existing Concept Representations</h2>
+        <hr>
+        <p>
+            Existing works on representing visual concepts can be divided into two separate categories. One category 
+            of approaches represent global factors of variation, such as facial expression, by situating them 
+            on a fixed underlying latent space, such as 
+            the &beta;-VAE model. A separate category of approaches represent local factors of variation by a set of 
+            as segmentation masks, as exemplified by the MONET model. While the former can enable representing global 
+            concepts, and the latter local concepts, there does exist a concept representation that can represent
+            both in an unified manner. In this paper, we propose instead to 
+            represent concepts as <b>EBMs</b>. Such an approach enables us to represent both global factors of variation
+            as well as local object factors of variation. Furthermore, we show that our concept representation enables
+            us to combine <b>disjointly</b> learned factors together in a <b>zero shot </b> manner.
+		</p>
+    </div>
+
+    <div class="section">
+        <h2>Compositional Visual Generation with Energy Based Models</h2>
+        <hr>
+        <p>
+            Energy based models <a href="https://openai.com/blog/energy-based-models/">(EBMs) </a> represent 
+            a distribution over data by defining an energy \(E_\theta(x) \) so that the likelihood of the data 
+            is proportional to \( \propto e^{-E_\theta(x)}\). Sampling in EBMs is done through MCMC sampling,
+            using <a href="https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf">Langevin dynamics </a>.
+
+            Our key insight in our work is that underlying probability distributions can be <b>composed</b> together to
+            represent different composition of concepts. Sampling under the modified probability distributions may then be
+            done using Langevin dynamics. We define three different composition operators over probability distributions, 
+            for the standard logical operators of conjunction, disjunction, and negation which we illustrate below.
+        </p>
+
+        <div class="row justify-content-left">
+            <div class="col-sm-1">
+			</div>
+            <div class="col-sm-10">
+                <img src="fig/comp_cartoon.png" style="width:100%">
+			</div>
+            <div class="col-sm-1">
+			</div>
+		</div>
+        <br>
+
+        <h4>Conjunction</h4>
+        <hr>
+
+        <p>
+            In concept conjunction, given separate independent concepts (such as a particular gender, hair style, or 
+            facial expression), we wish to construct an generation with the specified gender, hair style, and facial 
+            expression -- the combination of each concept. The likelihood of such an generation given a set of specific
+            concepts is equal to the product of the likelihood of each individual concept
+
+            \[ p(x|c_1 \; \text{and} \; c_2, \ldots, \; \text{and} \; c_i) = \prod_i p(x|c_i) \propto e^{-\sum_i E(x|c_i)}. \]
+
+            We utilize Langevin sampling to sample from this modified EBM distribution.
+        </p>
+
+        <h4>Disjunction</h4>
+        <hr>
+
+        <p>
+            In concept disjunction, given separate concepts such as the colors red and blue, we wish to construct an output that is either red or blue. We wish to construct a new distribution that has probability mass when any chosen concept is true. A natural choice of such a distribution is the sum of the likelihood of each concept:
+
+            \[ p(x|c_1 \; \text{or} \; c_2, \ldots \; \text{or}  \; c_i) \propto \sum_i p(x|c_i) / Z(c_i). \]
+
+            where \( Z(c_i) \) denotes partition function for the chosen concept. We utilize Langevin sampling
+            to sample from this modified EBM distribution.
+        </p>
+
+        <h4>Negation</h4>
+        <hr>
+
+        <p>
+            In concept negation, we wish to generate an output that does not contain the concept. Given a color red, we want an output that is of a different color, such as blue. Thus, we want to construct a distribution that places high likelihood to data that is outside a given concept. One choice is a distribution inversely proportional to the concept. Importantly, negation must be defined with respect to another concept to be useful. The opposite of alive may be dead, but not inanimate. Negation without a data distribution is not integrable and leads to a generation of chaotic textures which, while satisfying absence of a concept, is not desirable. Thus in our experiments with negation we combine it with another concept to ground the negation and obtain an integrable distribution:
+
+            \[ p(x| \text{not}(c_1), c_2) \propto \frac{p(x|c_2)}{p(x|c_1)^\alpha} \propto e^{ \alpha  E(x|c_1) - E(x|c_2) } \]
+            We utilize Langevin sampling to sample from this modified EBM distribution.
+        </p>
+
+        <h4>Concept Composition</h4>
+        <hr>
+
+        By combining the above operators, we can controllably generate images with complex relationships. For example, given EBMs trained on male, smiling, and black haired faces, through combinations of negation, disjunction and conjunction, we can selectively generate images in a Venn diagram as shown below:
+
+        <div class="row justify-content-left">
+            <div class="col-sm-2">
+			</div>
+            <div class="col-sm-8">
+                <img src="fig/venn.jpg" style="width:100%">
+			</div>
+            <div class="col-sm-2">
+			</div>
+		</div>
+
+
+
+    </div>
+
+    <div class="section">
+        <h2>Global Factor Compositional Generation</h2>
+        <hr>
+        <p>
+        We first explore the ability of our models to compose different global factors of variation. We train seperate 
+        EBMs on the attributes of shape, position, size and color. Through conjunction on each model sequentially, 
+        we are able to generate successively more refined versions of an object scene.
+        </p>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+<img src="fig/com_cube.jpg" style="float:none;width:500px">
+            </div>
+        </div>
+
+
+		<p>
+        We can similarily train seperate EBMs on the attributes of young, female, smiling, and wavy hair. Through 
+        conjunction on each model sequentially, we are able to generate successively more refined versions of human faces.
+        Surprisingly, we find that generations of our model are able to become increasingly more refined by adding 
+        more models.
+		</p>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+<img src="fig/com_human.jpg" style="float:none;width:400px">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+        <h2>Higher Level Composition</h2>
+        <hr>
+        <p>
+            We can further compose seperately trained EBMs in additional ways by nesting the compositional operators of conjunction, disjunction and negation. In the figure below, we showcase face generations of nested compositions.
+        </p>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+<img src="fig/symbolic.jpg" style="float:none;width:400px">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Object Level Compositional Generation</h2>
+        <hr>
+        <p>
+            We can also learn EBMs on the object attributes. We train a single EBM model to represent the position attribute. By summing EBMs conditioned on two different positions (conjunction), we can compositionally generate different number of cubes at the object level.
+        </p>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+                <img src="fig/multiobject.jpg" style="float:none;width:350px">
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="section">
+        <h2>Continual Learning of Visual Concepts</h2>
+        <hr>
+        <p>
+            By having the ability to compose in a zero-shot manner, EBMs enable us to learn, combine, and compose
+            visual concepts acquired in a <b>continual</b> manner. To test this we consider:
+
+            <ul id='continual_dataset'>
+            <li font-size: 6px>
+            A dataset consisting of position annotations of purple cubes at different positions.
+            </li>
+
+            <li font-size: 6px>
+            A dataset consisting of shape annotations of different purple shapes at different positions.
+            </li>
+
+            <li font-size: 6px>
+            A dataset consisting of color annotations of different color shapes at different positions.
+            </li>
+            </ul>
+
+            To mimick the concept learning process found  in humans, we train a position EBM model using only the first
+            dataset, a shape EBM model using only the second dataset, and color EBM model using the third dataset. 
+            Interestingly, <b>despite dataset mismatch</b>, we find that such learned visual concepts  can <b>robustly
+            </b> and <b>continually</b> combine which other models. We illustrate different combinations of position, shape
+            and color below:
+        </p>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+                <img src='fig/continuous.jpg' style="float:none;width:400px" class='img-fluid'>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="section">
+            <h2>Related Projects</h2>
+            <hr>
+            <p>
+                Check out our related projects on utilizing energy based models! <br>
+            </p>
+
+
+            <div class='row vspace-top'>
+                <div class="col-sm-3">
+                    <img src='img/protein.png' class='img-fluid'>
+                </div>
+
+                <div class="col">
+                    <div class='paper-title'>
+                        <a href="https://arxiv.org/abs/2004.13167">Energy Based Models for Atomic Level Protein Conformations</a>
+
+                    </div>
+                    <div>
+                        We introduce EBMs for modeling the underlying energy landscape of atomic level protein conformations. We train
+                        EBMs to predict the energy of different protein rotamer configurations, and find that our trained EBM models 
+                        can nearly match the performance of classical energy function Rosetta on the task of protein sidechain prediction.
+                    </div>
+                </div>
+            </div>
+
+            <div class='row vspace-top'>
+                <div class="col-sm-3">
+                    <img src='img/ebm_plan.png' class='img-fluid'>
+                </div>
+
+                <div class="col">
+                    <div class='paper-title'>
+                        <a href="https://arxiv.org/abs/2012.01316">Model Based Planning with Energy Based Models</a>
+                    </div>
+                    <div>
+                        We present a framework towards utilizing EBMs to learn, in an online fashion, trajectory level plans for 
+                        different start and goal configurations. This allows us to flexibly change and adapt to different
+                        sets of goals by changing the underlying trajectory inference objective.
+                    </div>
+                </div>
+            </div>
+
+            <div class='row vspace-top'>
+                <div class="col-sm-3">
+                    <video width="100%" playsinline="" autoplay="" loop="" preload="" muted="">
+                        <source src="img/half.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="col">
+                    <div class='paper-title'>
+                        <a href="https://openai.com/blog/energy-based-models/">Implicit Generation and Generalization with Energy Based Models</a>
+
+                    </div>
+                    <div>
+                        We introduce a method to scale EBM training to modern neural network architectures.
+                        We show that such trained EBMs have a set of unique properties, enabling model robustness,
+                        image and trajectory modeling, continual learning and compositional visual generation.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section">
+                <h2>Paper</h2>
+                <hr>
+                <div>
+                    <div class="list-group">
+                        <a href=""
+                           class="list-group-item">
+                            <img src="img/paper_thumbnail.png"
+                                 style="width:100%; margin-right:-20px; margin-top:-10px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Bibtex</h2>
+                <hr>
+                <div class="bibtexsection">
+                    @inproceedings{du2020compositional,
+                      title={Compositional Visual Generation with Energy Based Models},
+                      author={Du, Yilun and Li, Shuang and and Mordatch, Igor},
+                      journal={Advances in Neural Information Processing Systems},
+                      year={2020}
+                    }
+                </div>
+            </div>
+
+            <hr>
+
+            <footer>
+                <p>Send feedback and questions to <a href="https://yilundu.github.io">Yilun Du</a></p>
+            </footer>
+        </div>
+
+</body>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</html>
